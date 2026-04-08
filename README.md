@@ -42,8 +42,8 @@ Skills also activate automatically based on what you're doing — designing an A
 **Marketplace install:**
 
 ```
-/plugin marketplace add addyosmani/agent-skills
-/plugin install agent-skills@addy-agent-skills
+/plugin marketplace add wagnersza/agent-skills
+/plugin install agent-skills@wsza-agent-skills
 ```
 
 > **SSH errors?** The marketplace clones repos via SSH. If you don't have SSH keys set up on GitHub, either [add your SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) or switch to HTTPS for fetches only:
@@ -54,7 +54,7 @@ Skills also activate automatically based on what you're doing — designing an A
 **Local / development:**
 
 ```bash
-git clone https://github.com/addyosmani/agent-skills.git
+git clone https://github.com/wagnersza/agent-skills.git
 claude --plugin-dir /path/to/agent-skills
 ```
 
@@ -289,6 +289,34 @@ AI coding agents default to the shortest path - which often means skipping specs
 Each skill encodes hard-won engineering judgment: *when* to write a spec, *what* to test, *how* to review, and *when* to ship. These aren't generic prompts - they're the kind of opinionated, process-driven workflows that separate production-quality work from prototype-quality work.
 
 Skills bake in best practices from Google's engineering culture — including concepts from [Software Engineering at Google](https://abseil.io/resources/swe-book) and Google's [engineering practices guide](https://google.github.io/eng-practices/). You'll find Hyrum's Law in API design, the Beyonce Rule and test pyramid in testing, change sizing and review speed norms in code review, Chesterton's Fence in simplification, trunk-based development in git workflow, Shift Left and feature flags in CI/CD, and a dedicated deprecation skill treating code as a liability. These aren't abstract principles — they're embedded directly into the step-by-step workflows agents follow.
+
+---
+
+## Complementary Plugins
+
+Agent Skills focuses on **engineering process** — how to work safely and systematically with infrastructure. It pairs well with domain-specific plugins that teach agents the product details.
+
+### HashiCorp Agent Skills
+
+[hashicorp/agent-skills](https://github.com/hashicorp/agent-skills) provides Terraform-specific skills for HCL code generation, style conventions, `.tftest.hcl` authoring, module refactoring, and provider development. Install both plugins side by side — they cover different concerns with no conflicts.
+
+| Concern | This plugin | HashiCorp plugin |
+|---------|------------|-----------------|
+| Terraform workflow | Process: discover, plan, test, handoff for apply | HCL: style guide, code generation, modules |
+| Safety | terraform-guard hook blocks apply/destroy/import | No destructive command guards |
+| Testing | Testing pyramid (static, security, unit, integration, policy) | `.tftest.hcl` syntax, mocks, CI/CD integration |
+| Discovery | Read-only CLI inspection across AWS/GCP/Azure | Terraform Search API + bulk import (v1.14+) |
+| Provider dev | Not covered | Full provider scaffold, resources, acceptance tests |
+
+**Install both in Claude Code:**
+
+```bash
+claude plugin marketplace add wagnersza/agent-skills
+claude plugin install agent-skills@wsza-agent-skills
+
+claude plugin marketplace add hashicorp/agent-skills
+claude plugin install terraform-code-generation@hashicorp
+```
 
 ---
 
