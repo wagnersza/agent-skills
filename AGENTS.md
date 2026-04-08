@@ -28,6 +28,7 @@ The agent should automatically map user intent to skills:
 - Refactoring / simplification → `code-simplification`
 - API or interface design → `api-and-interface-design`
 - UI work → `frontend-ui-engineering`
+- Terraform / cloud infrastructure → `infrastructure-as-code`, `infrastructure-discovery`, `infrastructure-testing`
 
 ### Lifecycle Mapping (Implicit Commands)
 
@@ -37,8 +38,8 @@ Instead, the agent must internally follow this lifecycle:
 
 - DEFINE → `spec-driven-development`
 - PLAN → `planning-and-task-breakdown`
-- BUILD → `incremental-implementation` + `test-driven-development`
-- VERIFY → `debugging-and-error-recovery`
+- BUILD → `incremental-implementation` + `test-driven-development` (or `infrastructure-as-code` + `infrastructure-discovery` for infra)
+- VERIFY → `debugging-and-error-recovery` (or `infrastructure-testing` for Terraform)
 - REVIEW → `code-review-and-quality`
 - SHIP → `shipping-and-launch`
 
