@@ -2,6 +2,8 @@
 
 Quick reference for installing cloud CLIs and configuring read-only credentials for infrastructure discovery. Used by the `infrastructure-discovery`, `infrastructure-as-code`, and `infrastructure-testing` skills.
 
+> Replace `ALL_CAPS` values (e.g., `ACCOUNT_ID`, `PROJECT_ID`, `SUBSCRIPTION_ID`) with your actual resource IDs.
+
 ## Table of Contents
 
 - [AWS CLI](#aws-cli)
@@ -38,7 +40,19 @@ Verify: `aws --version`
 
 **Option B: Assume a Read-Only Role (recommended for teams)**
 
-1. Create a role with `ReadOnlyAccess` policy and a trust policy allowing your user to assume it.
+1. Create a trust policy file and the role (with admin credentials):
+   ```bash
+   # trust-policy.json: allow your IAM user to assume this role
+   cat > trust-policy.json << 'EOF'
+   {
+     "Version": "2012-10-17",
+     "Statement": [{"Effect": "Allow", "Principal": {"AWS": "arn:aws:iam::ACCOUNT_ID:root"}, "Action": "sts:AssumeRole"}]
+   }
+   EOF
+   aws iam create-role --role-name AgentReadOnly --assume-role-policy-document file://trust-policy.json
+   aws iam attach-role-policy --role-name AgentReadOnly \
+     --policy-arn arn:aws:iam::aws:policy/ReadOnlyAccess
+   ```
 2. Configure a profile that assumes the role:
    ```ini
    # ~/.aws/config
@@ -68,10 +82,12 @@ Or set as default: `export AWS_PROFILE=agent-readonly`
 | OS | Command |
 |---|---|
 | macOS | `brew install google-cloud-sdk` |
-| Linux | `curl https://sdk.cloud.google.com \| bash` then `gcloud init` |
+| Linux | `curl https://sdk.cloud.google.com &#124; bash && exec -l $SHELL` |
 | Windows | Download installer from https://cloud.google.com/sdk/docs/install |
 
 Verify: `gcloud --version`
+
+After install, run `gcloud init` to initialize the SDK and set your default project.
 
 ### Create Read-Only Credentials
 
