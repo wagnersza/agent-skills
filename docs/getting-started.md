@@ -69,6 +69,7 @@ Don't load all skills at once — it wastes context. Load skills relevant to the
 - Working on UI? Load `frontend-ui-engineering`
 - Debugging? Load `debugging-and-error-recovery`
 - Setting up CI? Load `ci-cd-and-automation`
+- Working with Terraform/cloud infra? Load `infrastructure-as-code`
 
 ## Skill Anatomy
 
@@ -110,6 +111,7 @@ The `.claude/commands/` directory contains slash commands for Claude Code:
 | `/build` | incremental-implementation + test-driven-development |
 | `/test` | test-driven-development |
 | `/review` | code-review-and-quality |
+| `/infra` | infrastructure-discovery, infrastructure-as-code, or infrastructure-testing |
 | `/ship` | shipping-and-launch |
 
 ## Using References
@@ -122,6 +124,7 @@ The `references/` directory contains supplementary checklists:
 | `performance-checklist.md` | performance-optimization |
 | `security-checklist.md` | security-and-hardening |
 | `accessibility-checklist.md` | frontend-ui-engineering |
+| `cloud-cli-setup.md` | infrastructure-discovery, infrastructure-as-code, infrastructure-testing |
 
 Load a reference when you need detailed patterns beyond what the skill covers.
 
