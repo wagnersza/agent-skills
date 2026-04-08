@@ -17,8 +17,8 @@ docs/         → Setup guides for different tools
 
 **Define:** spec-driven-development
 **Plan:** planning-and-task-breakdown
-**Build:** incremental-implementation, test-driven-development, context-engineering, frontend-ui-engineering, api-and-interface-design, infrastructure-as-code, infrastructure-discovery
-**Verify:** browser-testing-with-devtools, debugging-and-error-recovery, infrastructure-testing
+**Build:** incremental-implementation, test-driven-development, context-engineering, frontend-ui-engineering, api-and-interface-design, infrastructure-as-code, infrastructure-discovery, kubernetes-manifests
+**Verify:** browser-testing-with-devtools, debugging-and-error-recovery, infrastructure-testing, kubernetes-debugging, kubernetes-testing
 **Review:** code-review-and-quality, code-simplification, security-and-hardening, performance-optimization
 **Ship:** git-workflow-and-versioning, ci-cd-and-automation, deprecation-and-migration, documentation-and-adrs, shipping-and-launch
 
