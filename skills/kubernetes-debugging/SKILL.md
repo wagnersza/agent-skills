@@ -97,8 +97,11 @@ Pod status: CrashLoopBackOff
     +-- Exit code 1 (general error)
     |   -> Startup failure. Check environment variables, config maps, secrets.
     |
-    +-- Exit code 126 or 127 (command/file not found)
-        -> Wrong entrypoint or image. Verify the container image and command.
+    +-- Exit code 126 (not executable)
+    |   -> Binary exists but is not executable. Check file permissions in the image.
+    |
+    +-- Exit code 127 (file not found)
+        -> Binary does not exist. Verify the container image and entrypoint command.
 ```
 
 ### ImagePullBackOff

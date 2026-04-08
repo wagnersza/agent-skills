@@ -15,7 +15,7 @@ Write Kubernetes manifests that are secure, observable, and safe to apply. The a
 - Configuring Services, Ingress, IngressClass, NetworkPolicies
 - Managing ConfigMaps and Secrets
 - Setting up PersistentVolumeClaims and StorageClasses
-- Creating Helm charts or Kustomize overlays
+- Creating Helm charts
 - Writing RBAC resources (Roles, ClusterRoles, ServiceAccounts)
 - Any task involving `.yaml` manifest files for Kubernetes
 
@@ -57,11 +57,11 @@ Task: Create or modify Kubernetes manifests
      +----------------------------------------------+
      | Manifests ready for apply!                    |
      |                                               |
-     | Execute:  kubectl apply -f <path>             |
+     | Execute:  kubectl apply -f <path> -n <ns>      |
      | Resources: 3 Deployments, 2 Services,         |
      |            1 NetworkPolicy                    |
      | Verify:   kubectl get pods -n <ns>            |
-     | Rollback: kubectl delete -f <path>            |
+     | Rollback: kubectl delete -f <path> -n <ns>    |
      +----------------------------------------------+
         |
         v
@@ -73,7 +73,7 @@ Task: Create or modify Kubernetes manifests
 | File | Content | Load When |
 |---|---|---|
 | workloads.md | Deployment, StatefulSet, DaemonSet, Job, CronJob patterns | Writing workload manifests |
-| networking.md | Service, Ingress, IngressClass, Gateway API | Configuring network resources |
+| networking.md | Service, Ingress, NetworkPolicy, DNS, EndpointSlice | Configuring network resources |
 | configuration.md | ConfigMap, Secret, environment variables, volume mounts | Managing application config |
 | storage.md | PVC, StorageClass, CSI drivers, volume patterns | Setting up persistent storage |
 | helm-charts.md | Chart structure, values.yaml, templates, dependencies | Creating or modifying Helm charts |
@@ -299,7 +299,7 @@ data:
 7. Use namespaces for logical isolation
 8. Apply consistent labels: `app`, `version`, `component`, `part-of`
 9. Pin specific image tags (never `latest` in production)
-10. Set security context: `runAsNonRoot`, `readOnlyRootFilesystem`, `drop ALL capabilities`
+10. Set security context: `runAsNonRoot`, `readOnlyRootFilesystem`, `drop ALL capabilities`, `seccompProfile: RuntimeDefault`
 
 ### MUST NOT DO
 
