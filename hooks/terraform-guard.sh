@@ -8,6 +8,11 @@
 # Output: exit 0 (allow) or exit 2 + stderr message (block)
 #
 # Requires: jq, Bash 3.2+
+#
+# Limitations:
+# - Does not detect terraform invoked via bash -c, eval, or command substitution
+# - Does not handle nested subshells or process substitution
+# - This hook is a safety net, not a security sandbox
 
 set -euo pipefail
 
@@ -17,6 +22,10 @@ COMMAND=$(printf '%s' "$INPUT" | jq -r '.tool_input.command // ""' 2>/dev/null) 
   # If jq fails or input is malformed, allow (don't block non-terraform work)
   exit 0
 }
+
+# Only inspect Bash tool invocations; allow everything else through
+TOOL_NAME=$(printf '%s' "$INPUT" | jq -r '.tool_name // ""' 2>/dev/null) || exit 0
+[ "$TOOL_NAME" = "Bash" ] || exit 0
 
 # Empty command — nothing to check
 [ -z "$COMMAND" ] && exit 0
@@ -99,7 +108,7 @@ check_segment() {
   while [[ "$subcmd" == -* ]]; do
     # Shift words: subcmd becomes second, second becomes next word
     local rest
-    rest=$(printf '%s' "$segment" | awk '{found=0; for(i=1;i<=NF;i++){if(found){for(j=i;j<=NF;j++) printf "%s ", $j; break} if($i=="'"$subcmd"'") found=1}}')
+    rest=$(printf '%s' "$segment" | awk -v target="$subcmd" '{found=0; for(i=1;i<=NF;i++){if(found){for(j=i;j<=NF;j++) printf "%s ", $j; break} if($i==target) found=1}}')
     subcmd=$(printf '%s' "$rest" | awk '{print $1}')
     second=$(printf '%s' "$rest" | awk '{print $2}')
     # If we run out of words, block

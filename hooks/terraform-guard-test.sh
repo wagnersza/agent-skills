@@ -83,6 +83,8 @@ assert_allowed "non-terraform command: npm test" "npm test"
 assert_allowed "non-terraform command: git status" "git status"
 assert_allowed "terraform plan chained with ls" "terraform plan && ls"
 assert_allowed "ls chained with terraform plan" "ls && terraform plan"
+assert_allowed "terraform -chdir=modules/vpc plan" "terraform -chdir=modules/vpc plan"
+assert_allowed "terraform -chdir=modules/vpc state list" "terraform -chdir=modules/vpc state list"
 
 # ── Blocked commands (exit 2) ───────────────────────────────────────────
 
@@ -111,6 +113,7 @@ assert_blocked "chained with or" "terraform plan || terraform apply"
 assert_blocked "full path terraform" "/usr/local/bin/terraform apply"
 assert_blocked "relative path terraform" "./terraform apply"
 assert_blocked "unknown subcommand" "terraform newcmd"
+assert_blocked "terraform -chdir=modules/vpc apply" "terraform -chdir=modules/vpc apply"
 
 # ── Edge cases ──────────────────────────────────────────────────────────
 
