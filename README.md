@@ -202,6 +202,18 @@ Quick-reference material that skills pull in when needed:
 
 ---
 
+## Hooks
+
+Lifecycle hooks that run automatically during Claude Code sessions:
+
+| Hook | What It Does | Event |
+|------|-------------|-------|
+| [session-start](hooks/session-start.sh) | Injects the skill discovery meta-skill into every session | SessionStart |
+| [terraform-guard](hooks/TERRAFORM-GUARD.md) | Blocks destructive terraform/tofu commands (apply, destroy, import, etc.) — allowlist-based, only safe read-only subcommands permitted | PreToolUse (Bash) |
+| [simplify-ignore](hooks/SIMPLIFY-IGNORE.md) | Hides annotated code blocks from `/code-simplify` using placeholder substitution | PreToolUse (Read), PostToolUse (Edit\|Write), Stop |
+
+---
+
 ## How Skills Work
 
 Every skill follows a consistent anatomy:
@@ -263,7 +275,7 @@ agent-skills/
 │   └── using-agent-skills/            #   Meta: how to use this pack
 ├── agents/                            # 3 specialist personas
 ├── references/                        # 5 supplementary checklists
-├── hooks/                             # Session lifecycle hooks
+├── hooks/                             # Session lifecycle hooks & safety guards
 ├── .claude/commands/                  # 8 slash commands
 └── docs/                              # Setup guides per tool
 ```
