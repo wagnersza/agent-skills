@@ -9,7 +9,7 @@ skills/       → Core skills (SKILL.md per directory)
 agents/       → Reusable agent personas (code-reviewer, test-engineer, security-auditor)
 hooks/        → Session lifecycle hooks
 .claude/commands/ → Slash commands (/spec, /plan, /build, /test, /review, /code-simplify, /ship)
-references/   → Supplementary checklists (testing, performance, security, accessibility)
+references/   → Supplementary checklists (testing, performance, security, accessibility, cloud-cli-setup)
 docs/         → Setup guides for different tools
 ```
 
@@ -17,8 +17,8 @@ docs/         → Setup guides for different tools
 
 **Define:** spec-driven-development
 **Plan:** planning-and-task-breakdown
-**Build:** incremental-implementation, test-driven-development, context-engineering, frontend-ui-engineering, api-and-interface-design
-**Verify:** browser-testing-with-devtools, debugging-and-error-recovery
+**Build:** incremental-implementation, test-driven-development, context-engineering, frontend-ui-engineering, api-and-interface-design, infrastructure-as-code, infrastructure-discovery
+**Verify:** browser-testing-with-devtools, debugging-and-error-recovery, infrastructure-testing
 **Review:** code-review-and-quality, code-simplification, security-and-hardening, performance-optimization
 **Ship:** git-workflow-and-versioning, ci-cd-and-automation, deprecation-and-migration, documentation-and-adrs, shipping-and-launch
 
@@ -35,6 +35,7 @@ docs/         → Setup guides for different tools
 
 - `npm test` — Not applicable (this is a documentation project)
 - Validate: Check that all SKILL.md files have valid YAML frontmatter with name and description
+- `/infra` — Infrastructure workflow (discover, write, test Terraform)
 
 ## Boundaries
 
