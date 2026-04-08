@@ -113,7 +113,7 @@ Is kubeconform or kubeval installed?
                  - Skip for this session"
 ```
 
-### Deprecated API Detection
+## Deprecated API Detection
 
 Common migrations across Kubernetes versions:
 
