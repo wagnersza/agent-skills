@@ -9,8 +9,6 @@ description: Discovers and inspects cloud infrastructure using read-only CLI com
 
 Use cloud CLIs to understand what actually exists in your infrastructure. Terraform state can be stale — the cloud CLI shows reality. This skill is read-only: it never creates, modifies, or deletes resources. When changes are needed, hand off to the `infrastructure-as-code` skill.
 
-All commands use `terraform`. OpenTofu (`tofu`) is a drop-in replacement — swap the binary.
-
 ## When to Use
 
 - Understanding what resources exist before writing Terraform
@@ -104,7 +102,7 @@ Use these patterns to inspect resources. All commands are read-only. **Never run
 
 ## Drift Detection
 
-Drift is when cloud reality doesn't match Terraform state. Detect it by comparing both sources.
+Drift is when cloud reality doesn't match Terraform state. Detect it by comparing both sources. Commands use `terraform`. OpenTofu (`tofu`) is a drop-in replacement — swap the binary.
 
 ### Process
 
