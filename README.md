@@ -118,9 +118,9 @@ Skills are plain Markdown - they work with any agent that accepts system prompts
 
 ---
 
-## All 22 Skills
+## All 25 Skills
 
-The commands above are the entry points. Under the hood, they activate these 22 skills — each one a structured workflow with steps, verification gates, and anti-rationalization tables. You can also reference any skill directly.
+The commands above are the entry points. Under the hood, they activate these 25 skills — each one a structured workflow with steps, verification gates, and anti-rationalization tables. You can also reference any skill directly.
 
 ### Define - Clarify what to build
 
@@ -146,6 +146,7 @@ The commands above are the entry points. Under the hood, they activate these 22 
 | [api-and-interface-design](skills/api-and-interface-design/SKILL.md) | Contract-first design, Hyrum's Law, One-Version Rule, error semantics, boundary validation | Designing APIs, module boundaries, or public interfaces |
 | [infrastructure-as-code](skills/infrastructure-as-code/SKILL.md) | Write Terraform/OpenTofu code with module conventions, state management, and mandatory apply handoff | Creating or modifying cloud infrastructure with Terraform |
 | [infrastructure-discovery](skills/infrastructure-discovery/SKILL.md) | Read-only cloud CLI inspection for state, drift detection, and debug patterns across AWS, GCP, Azure | Understanding existing infrastructure or debugging cloud issues |
+| [kubernetes-manifests](skills/kubernetes-manifests/SKILL.md) | Write declarative Kubernetes YAML and Helm charts with security hardening and mandatory apply handoff | Creating or modifying Kubernetes manifests, Services, RBAC, Helm charts |
 
 ### Verify - Prove it works
 
@@ -154,6 +155,8 @@ The commands above are the entry points. Under the hood, they activate these 22 
 | [browser-testing-with-devtools](skills/browser-testing-with-devtools/SKILL.md) | Chrome DevTools MCP for live runtime data - DOM inspection, console logs, network traces, performance profiling | Building or debugging anything that runs in a browser |
 | [debugging-and-error-recovery](skills/debugging-and-error-recovery/SKILL.md) | Five-step triage: reproduce, localize, reduce, fix, guard. Stop-the-line rule, safe fallbacks | Tests fail, builds break, or behavior is unexpected |
 | [infrastructure-testing](skills/infrastructure-testing/SKILL.md) | Terraform testing pyramid — static checks, security scanning, unit tests (terraform test + mocks), integration tests, policy-as-code | After writing new Terraform modules or configurations |
+| [kubernetes-testing](skills/kubernetes-testing/SKILL.md) | Validate Kubernetes manifests with schema checks, security scanning, and policy-as-code | After writing new Kubernetes manifests or Helm charts |
+| [kubernetes-debugging](skills/kubernetes-debugging/SKILL.md) | Read-only cluster inspection with diagnostic decision trees for common failure modes | Pod failures, service connectivity issues, resource problems |
 
 ### Review - Quality gates before merge
 
@@ -249,7 +252,7 @@ Every skill follows a consistent anatomy:
 
 ```
 agent-skills/
-├── skills/                            # 22 core skills (SKILL.md per directory)
+├── skills/                            # 25 core skills (SKILL.md per directory)
 │   ├── idea-refine/                   #   Define
 │   ├── spec-driven-development/       #   Define
 │   ├── planning-and-task-breakdown/   #   Plan
@@ -260,9 +263,12 @@ agent-skills/
 │   ├── api-and-interface-design/      #   Build
 │   ├── infrastructure-as-code/        #   Build
 │   ├── infrastructure-discovery/      #   Build
+│   ├── kubernetes-manifests/          #   Build
 │   ├── browser-testing-with-devtools/ #   Verify
 │   ├── debugging-and-error-recovery/  #   Verify
 │   ├── infrastructure-testing/        #   Verify
+│   ├── kubernetes-debugging/          #   Verify
+│   ├── kubernetes-testing/            #   Verify
 │   ├── code-review-and-quality/       #   Review
 │   ├── code-simplification/          #   Review
 │   ├── security-and-hardening/        #   Review
